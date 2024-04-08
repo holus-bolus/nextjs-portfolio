@@ -43,6 +43,15 @@ const Navbar = () => {
       backgroundColor: "rgb(255,255,255)",
     },
   };
+
+  const listVariants = {
+    closed: {
+      x: "100vw",
+    },
+    opened: {
+      x: 0,
+    },
+  };
   return (
     <div
       className={
@@ -92,7 +101,7 @@ const Navbar = () => {
           <motion.div
             variants={topVariants}
             animate={open ? "opened" : "closed"}
-            className="w-10 h-1 bg-white rounded"
+            className="w-10 h-1 bg-white rounded origin-left"
           ></motion.div>
           <motion.div
             variants={centerVariants}
@@ -106,7 +115,14 @@ const Navbar = () => {
           ></motion.div>
         </button>
         {open && (
-          <ul className="menu-items absolute top-0 left-0 w-screen h-screen bg-black text-white flex flex-col justify-center items-center gap-8 text-4xl">
+          <motion.ul
+            variants={listVariants}
+            initial="closed"
+            animate="opened"
+            className="menu-items absolute
+             top-0 left-0 w-screen h-screen bg-black text-white flex flex-col
+             justify-center items-center gap-8 text-4xl z-40"
+          >
             {links.map(
               (link) =>
                 link.url && (
@@ -115,7 +131,7 @@ const Navbar = () => {
                   </Link>
                 ),
             )}
-          </ul>
+          </motion.ul>
         )}
       </div>
     </div>
